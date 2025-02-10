@@ -4,147 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Harry Potter Fact Hub & Quiz</title>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* Global Reset & Box Sizing */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #f0f0f0;
-      color: #333;
-      line-height: 1.6;
-    }
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 20px;
-    }
-    /* Header */
-    header {
-      background: url('https://via.placeholder.com/1500x500?text=Harry+Potter') no-repeat center center/cover;
-      position: relative;
-      color: #fff;
-      padding: 100px 0;
-      text-align: center;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1;
-    }
-    header h1, header p {
-      position: relative;
-      z-index: 2;
-    }
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-    header p {
-      font-size: 1.2rem;
-    }
-    /* Navigation Bar */
-    nav {
-      background: #6a1b9a;
-      color: #fff;
-      padding: 10px 0;
-      text-align: center;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #f0f0f0;
-    }
-    /* Section Styles */
-    section {
-      background: #fff;
-      margin: 20px 0;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    section h2 {
-      margin-bottom: 15px;
-      color: #6a1b9a;
-    }
-    /* Random Fact Display */
-    #factDisplay {
-      font-size: 1.3rem;
-      margin: 15px 0;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-    #factDisplay.visible {
-      opacity: 1;
-    }
-    /* Button Styles */
-    .btn {
-      background: #6a1b9a;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-      display: inline-block;
-      margin: 10px 0;
-    }
-    .btn:hover {
-      background: #4a148c;
-    }
-    /* Quiz Styles */
-    .quiz-question {
-      margin-bottom: 20px;
-    }
-    .quiz-question p {
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-    .quiz-question label {
-      display: block;
-      margin-bottom: 5px;
-      cursor: pointer;
-    }
-    .result {
-      font-size: 1.4rem;
-      background: #e8eaf6;
-      padding: 15px;
-      border-radius: 5px;
-      text-align: center;
-      display: none;
-      margin-top: 20px;
-    }
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #6a1b9a;
-      color: #fff;
-      margin-top: 20px;
-    }
-  </style>
+  <!-- Added Cinzel for a more medieval look along with Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Canvas-confetti library for the confetti effect -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
+
   <!-- Header -->
   <header>
-    <div class="container">
+    <div class="header-overlay">
       <h1>Harry Potter Fact Hub & Quiz</h1>
       <p>Discover magical facts and uncover your true Hogwarts house!</p>
     </div>
@@ -152,18 +22,18 @@
 
   <!-- Navigation -->
   <nav>
-    <div class="container">
-      <a href="#fact-section">Random Fact</a>
-      <a href="#quiz-section">Quiz</a>
-    </div>
+    <a href="#fact-section">Random Fact</a>
+    <a href="#quiz-section">Quiz</a>
   </nav>
 
-  <!-- Main Content Container -->
+  <!-- Main Content -->
   <div class="container">
     <!-- Random Fact Section -->
     <section id="fact-section">
       <h2>Random Harry Potter Fact</h2>
-      <p id="factDisplay">Click the button below to reveal a magical fact!</p>
+      <div class="fact-card">
+        <p id="factDisplay">Click the button below to reveal a magical fact!</p>
+      </div>
       <button class="btn" onclick="showRandomFact()">Show Random Fact</button>
     </section>
 
@@ -171,7 +41,7 @@
     <section id="quiz-section">
       <h2>Which Hogwarts House Are You?</h2>
       <form id="quizForm">
-        <!-- Question 1 -->
+        <!-- Quiz Question 1 -->
         <div class="quiz-question">
           <p>1. What quality do you value the most?</p>
           <label><input type="radio" name="q1" value="Gryffindor"> Bravery</label>
@@ -179,78 +49,88 @@
           <label><input type="radio" name="q1" value="Hufflepuff"> Loyalty</label>
           <label><input type="radio" name="q1" value="Slytherin"> Ambition</label>
         </div>
-        <!-- Question 2 -->
+
+        <!-- Quiz Question 2 -->
         <div class="quiz-question">
-          <p>2. Which animal do you resonate with the most?</p>
-          <label><input type="radio" name="q2" value="Gryffindor"> Lion</label>
-          <label><input type="radio" name="q2" value="Ravenclaw"> Eagle</label>
-          <label><input type="radio" name="q2" value="Hufflepuff"> Badger</label>
-          <label><input type="radio" name="q2" value="Slytherin"> Snake</label>
+          <p>2. Which subject fascinates you the most?</p>
+          <label><input type="radio" name="q2" value="Gryffindor"> Defense Against the Dark Arts</label>
+          <label><input type="radio" name="q2" value="Ravenclaw"> Charms</label>
+          <label><input type="radio" name="q2" value="Hufflepuff"> Herbology</label>
+          <label><input type="radio" name="q2" value="Slytherin"> Potions</label>
         </div>
-        <!-- Question 3 -->
+
+        <!-- Quiz Question 3 -->
         <div class="quiz-question">
-          <p>3. Which subject excites you the most?</p>
-          <label><input type="radio" name="q3" value="Gryffindor"> Defense Against the Dark Arts</label>
-          <label><input type="radio" name="q3" value="Ravenclaw"> Charms</label>
-          <label><input type="radio" name="q3" value="Hufflepuff"> Herbology</label>
-          <label><input type="radio" name="q3" value="Slytherin"> Potions</label>
+          <p>3. Which magical creature do you admire?</p>
+          <label><input type="radio" name="q3" value="Gryffindor"> Phoenix</label>
+          <label><input type="radio" name="q3" value="Ravenclaw"> Owl</label>
+          <label><input type="radio" name="q3" value="Hufflepuff"> Hippogriff</label>
+          <label><input type="radio" name="q3" value="Slytherin"> Basilisk</label>
         </div>
-        <!-- Question 4 -->
+
+        <!-- Quiz Question 4 -->
         <div class="quiz-question">
-          <p>4. How would your friends describe you?</p>
-          <label><input type="radio" name="q4" value="Gryffindor"> Courageous and daring</label>
-          <label><input type="radio" name="q4" value="Ravenclaw"> Wise and witty</label>
-          <label><input type="radio" name="q4" value="Hufflepuff"> Kind and dependable</label>
-          <label><input type="radio" name="q4" value="Slytherin"> Resourceful and cunning</label>
+          <p>4. What is your preferred magical item?</p>
+          <label><input type="radio" name="q4" value="Gryffindor"> Sword of Gryffindor</label>
+          <label><input type="radio" name="q4" value="Ravenclaw"> Ravenclaw’s Diadem</label>
+          <label><input type="radio" name="q4" value="Hufflepuff"> Hufflepuff’s Cup</label>
+          <label><input type="radio" name="q4" value="Slytherin"> Slytherin’s Locket</label>
         </div>
-        <!-- Question 5 -->
+
+        <!-- Quiz Question 5 -->
         <div class="quiz-question">
-          <p>5. Which magical creature fascinates you the most?</p>
-          <label><input type="radio" name="q5" value="Gryffindor"> Phoenix</label>
-          <label><input type="radio" name="q5" value="Ravenclaw"> Owl</label>
-          <label><input type="radio" name="q5" value="Hufflepuff"> Hippogriff</label>
-          <label><input type="radio" name="q5" value="Slytherin"> Basilisk</label>
+          <p>5. What type of wizard are you?</p>
+          <label><input type="radio" name="q5" value="Gryffindor"> Adventurous</label>
+          <label><input type="radio" name="q5" value="Ravenclaw"> Analytical</label>
+          <label><input type="radio" name="q5" value="Hufflepuff"> Hardworking</label>
+          <label><input type="radio" name="q5" value="Slytherin"> Strategic</label>
         </div>
-        <!-- Question 6 -->
+
+        <!-- Quiz Question 6 -->
         <div class="quiz-question">
-          <p>6. What type of magic do you find most appealing?</p>
-          <label><input type="radio" name="q6" value="Gryffindor"> Spellcasting and dueling</label>
-          <label><input type="radio" name="q6" value="Ravenclaw"> Enchantments and riddles</label>
-          <label><input type="radio" name="q6" value="Hufflepuff"> Healing and nature magic</label>
-          <label><input type="radio" name="q6" value="Slytherin"> Dark magic and potions</label>
+          <p>6. When faced with a challenge, what is your strategy?</p>
+          <label><input type="radio" name="q6" value="Gryffindor"> Face it head-on.</label>
+          <label><input type="radio" name="q6" value="Ravenclaw"> Plan meticulously.</label>
+          <label><input type="radio" name="q6" value="Hufflepuff"> Persevere until you succeed.</label>
+          <label><input type="radio" name="q6" value="Slytherin"> Use clever tactics.</label>
         </div>
-        <!-- Question 7 -->
+
+        <!-- Quiz Question 7 -->
         <div class="quiz-question">
-          <p>7. Which magical item would you choose?</p>
-          <label><input type="radio" name="q7" value="Gryffindor"> Sword of Gryffindor</label>
-          <label><input type="radio" name="q7" value="Ravenclaw"> Diadem of Ravenclaw</label>
-          <label><input type="radio" name="q7" value="Hufflepuff"> Cup of Hufflepuff</label>
-          <label><input type="radio" name="q7" value="Slytherin"> Locket of Slytherin</label>
+          <p>7. Which magical challenge excites you the most?</p>
+          <label><input type="radio" name="q7" value="Gryffindor"> A daring rescue mission.</label>
+          <label><input type="radio" name="q7" value="Ravenclaw"> Solving a complex riddle.</label>
+          <label><input type="radio" name="q7" value="Hufflepuff"> An adventure of personal growth.</label>
+          <label><input type="radio" name="q7" value="Slytherin"> A quest for power and influence.</label>
         </div>
-        <!-- Question 8 -->
+
+        <!-- Quiz Question 8 -->
         <div class="quiz-question">
-          <p>8. What is your approach to challenges?</p>
-          <label><input type="radio" name="q8" value="Gryffindor"> Face them head-on</label>
-          <label><input type="radio" name="q8" value="Ravenclaw"> Strategize and analyze</label>
-          <label><input type="radio" name="q8" value="Hufflepuff"> Work steadily and persistently</label>
-          <label><input type="radio" name="q8" value="Slytherin"> Find a clever workaround</label>
+          <p>8. In a magical duel, what is your preferred tactic?</p>
+          <label><input type="radio" name="q8" value="Gryffindor"> Charge with bold spells.</label>
+          <label><input type="radio" name="q8" value="Ravenclaw"> Counter with strategic magic.</label>
+          <label><input type="radio" name="q8" value="Hufflepuff"> Defend until an opening appears.</label>
+          <label><input type="radio" name="q8" value="Slytherin"> Exploit every advantage.</label>
         </div>
-        <!-- Question 9 -->
+
+        <!-- Quiz Question 9 -->
         <div class="quiz-question">
-          <p>9. Which location at Hogwarts do you prefer?</p>
-          <label><input type="radio" name="q9" value="Gryffindor"> Gryffindor Common Room</label>
-          <label><input type="radio" name="q9" value="Ravenclaw"> Ravenclaw Tower</label>
-          <label><input type="radio" name="q9" value="Hufflepuff"> Hufflepuff Basement</label>
-          <label><input type="radio" name="q9" value="Slytherin"> Slytherin Dungeon</label>
+          <p>9. How do you approach friendships?</p>
+          <label><input type="radio" name="q9" value="Gryffindor"> Stand by my friends through thick and thin.</label>
+          <label><input type="radio" name="q9" value="Hufflepuff"> Cherish loyal and supportive companions.</label>
+          <label><input type="radio" name="q9" value="Ravenclaw"> Seek friends who stimulate my mind.</label>
+          <label><input type="radio" name="q9" value="Slytherin"> Form alliances that help me achieve my goals.</label>
         </div>
-        <!-- Question 10 -->
+
+        <!-- Quiz Question 10 -->
         <div class="quiz-question">
-          <p>10. What motivates you the most?</p>
-          <label><input type="radio" name="q10" value="Gryffindor"> A desire for adventure</label>
-          <label><input type="radio" name="q10" value="Ravenclaw"> A thirst for knowledge</label>
-          <label><input type="radio" name="q10" value="Hufflepuff"> A need for belonging</label>
-          <label><input type="radio" name="q10" value="Slytherin"> The ambition to succeed</label>
+          <p>10. What's your ideal way to spend a free day in the wizarding world?</p>
+          <label><input type="radio" name="q10" value="Gryffindor"> Exploring magical mysteries and adventures.</label>
+          <label><input type="radio" name="q10" value="Ravenclaw"> Studying ancient spells and lore.</label>
+          <label><input type="radio" name="q10" value="Hufflepuff"> Enjoying time with loved ones in a cozy setting.</label>
+          <label><input type="radio" name="q10" value="Slytherin"> Networking with influential wizards.</label>
         </div>
+
         <button type="button" class="btn" onclick="submitQuiz()">Submit Quiz</button>
       </form>
       <div id="quizResult" class="result"></div>
@@ -263,90 +143,121 @@
   </footer>
 
   <script>
-    // Array of sample Harry Potter facts (over 30 facts)
     const facts = [
       "J.K. Rowling wrote much of the first Harry Potter book in Edinburgh cafés.",
-      "The character of Harry Potter was almost named 'Harry Batt'.",
-      "Hogwarts has four houses: Gryffindor, Ravenclaw, Hufflepuff, and Slytherin.",
       "The Hogwarts Express departs from Platform 9¾ at King's Cross Station.",
-      "The Marauder's Map shows every person's location within Hogwarts.",
-      "The wizarding world is full of magical creatures—from house-elves to hippogriffs.",
-      "Quidditch is a popular sport in the wizarding world, played on broomsticks.",
-      "The Sorting Hat was originally made by the founders of Hogwarts.",
-      "Dumbledore's office contains many mysterious and enchanted objects.",
-      "The Forbidden Forest is home to many magical creatures and secrets.",
-      "Platform 9¾ is one of the most iconic locations in the wizarding world.",
-      "The Mirror of Erised shows the deepest, most desperate desire of a person's heart.",
-      "Hagrid was expelled from Hogwarts, but later allowed to work there.",
-      "The Burrow, home of the Weasley family, is full of warmth and magic.",
-      "The Room of Requirement appears only when someone is in great need of it.",
-      "Moaning Myrtle haunts the bathroom at Hogwarts.",
-      "The Pensieve is used to review and explore memories.",
-      "The Triwizard Tournament is a challenging and dangerous magical competition.",
-      "Nearly Headless Nick is the ghost of Gryffindor House.",
       "Dobby the house-elf became a symbol of freedom and loyalty.",
-      "Hogwarts Castle is filled with secret passages and hidden rooms.",
-      "The daily Prophet is the primary newspaper in the wizarding world.",
-      "Wizards and witches use wands to channel magic.",
-      "The Invisibility Cloak is one of the three Deathly Hallows.",
-      "The enchanted ceiling in the Great Hall reflects the sky outside.",
-      "Professor Snape was both feared and admired for his complex character.",
-      "The Weasley twins are famous for their mischievous inventions and pranks.",
+      "The Room of Requirement appears only when someone is in great need of it.",
+      "Nearly Headless Nick is the ghost of Gryffindor House.",
       "Hogsmeade is the only entirely wizarding village in Britain.",
-      "The Room of Requirement has helped countless students in times of need.",
-      "The wizarding world has its own currency: Galleons, Sickles, and Knuts.",
-      "Magic is woven into every aspect of life in the wizarding world."
+      "The Invisibility Cloak is one of the three Deathly Hallows.",
+      "Hogwarts was founded over 1,000 years ago.",
+      "The Marauder’s Map shows every person’s location in Hogwarts.",
+      "Wizards and witches use spells like 'Alohomora' to unlock doors.",
+      "The Weasley twins own Weasleys’ Wizard Wheezes, a joke shop.",
+      "The Triwizard Tournament is a magical competition between schools.",
+      "Dementors are creatures that feed on happiness.",
+      "Fawkes the Phoenix helped Harry defeat the Basilisk.",
+      "The Patronus Charm repels Dementors.",
+      "Voldemort made 7 Horcruxes to try to become immortal.",
+      "Professor Snape was secretly in love with Lily Potter.",
+      "Hogwarts Castle has moving staircases.",
+      "Quidditch is the most popular sport in the wizarding world.",
+      "Butterbeer is a popular drink among witches and wizards.",
+      "The Sorting Hat was originally owned by Godric Gryffindor.",
+      "House elves can only be freed by being given clothes.",
+      "Albus Dumbledore was once a professor at Hogwarts.",
+      "The Chamber of Secrets was opened by Tom Riddle.",
+      "Sirius Black is Harry's godfather.",
+      "The Elder Wand is one of the Deathly Hallows.",
+      "The Burrow is the Weasley family home.",
+      "Moaning Myrtle haunts a bathroom at Hogwarts.",
+      "The Quibbler publishes unconventional wizard news.",
+      "Gringotts is the bank for wizards and witches."
     ];
 
-    // Function to display a random fact with a fade-in effect
     function showRandomFact() {
       const randomIndex = Math.floor(Math.random() * facts.length);
-      const factDisplay = document.getElementById('factDisplay');
-      factDisplay.classList.remove('visible'); // Reset opacity to restart fade-in
-      setTimeout(() => {
-        factDisplay.textContent = facts[randomIndex];
-        factDisplay.classList.add('visible');
-      }, 100);
+      const factElement = document.getElementById('factDisplay');
+      factElement.textContent = facts[randomIndex];
+      // Trigger pop-in animation by removing and re-adding the class
+      factElement.classList.remove('pop-in');
+      void factElement.offsetWidth; // Trigger reflow to restart animation
+      factElement.classList.add('pop-in');
     }
 
-    // Function to process quiz results from 10 questions
     function submitQuiz() {
-      const form = document.getElementById('quizForm');
-      const formData = new FormData(form);
-      const scores = {
+      const totalQuestions = 10;
+      const counts = {
         Gryffindor: 0,
         Ravenclaw: 0,
         Hufflepuff: 0,
         Slytherin: 0
       };
 
-      // Process each question (q1 through q10)
-      ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10'].forEach(q => {
-        const answer = formData.get(q);
-        if (answer && scores.hasOwnProperty(answer)) {
-          scores[answer]++;
+      // Loop through each question and tally the answers
+      for (let i = 1; i <= totalQuestions; i++) {
+        const radios = document.getElementsByName('q' + i);
+        let answered = false;
+        for (let radio of radios) {
+          if (radio.checked) {
+            counts[radio.value]++;
+            answered = true;
+            break;
+          }
         }
-      });
-
-      // Determine which house scored the highest
-      let selectedHouse = null;
-      let maxScore = 0;
-      for (const house in scores) {
-        if (scores[house] > maxScore) {
-          maxScore = scores[house];
-          selectedHouse = house;
+        if (!answered) {
+          alert('Please answer question ' + i);
+          return;
         }
       }
 
-      // Display the quiz result
-      const quizResult = document.getElementById('quizResult');
-      if (selectedHouse) {
-        quizResult.textContent = `You belong to ${selectedHouse}!`;
-      } else {
-        quizResult.textContent = 'Please answer all the questions before submitting.';
+      // Determine the house with the highest score
+      let maxCount = 0;
+      let resultHouse = '';
+      for (const house in counts) {
+        if (counts[house] > maxCount) {
+          maxCount = counts[house];
+          resultHouse = house;
+        }
       }
-      quizResult.style.display = 'block';
+
+      // Create suspense before revealing the result
+      const resultContainer = document.getElementById('quizResult');
+      resultContainer.innerHTML = '<p class="tension">Calculating your destiny...</p>';
+
+      // After a delay, reveal the result with a fade-in animation, special styling, and trigger confetti
+      setTimeout(() => {
+        resultContainer.innerHTML = 
+          '<div class="result-reveal">' +
+            '<h3>You belong to ' + resultHouse + '!</h3>' +
+            '<p>' + getHouseMessage(resultHouse) + '</p>' +
+          '</div>';
+        resultContainer.classList.add('fade-in');
+        // Trigger confetti effect
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }, 3000);
+    }
+
+    function getHouseMessage(house) {
+      switch (house) {
+        case 'Gryffindor':
+          return "Courage, bravery, and chivalry define you. Embrace your inner lion!";
+        case 'Ravenclaw':
+          return "Your wit and wisdom set you apart. Let your curiosity guide you!";
+        case 'Hufflepuff':
+          return "Your loyalty and dedication make you truly special. Keep shining with kindness!";
+        case 'Slytherin':
+          return "Ambition and resourcefulness drive you. Embrace your clever spirit!";
+        default:
+          return "The magic within you is unique!";
+      }
     }
   </script>
+
 </body>
 </html>
