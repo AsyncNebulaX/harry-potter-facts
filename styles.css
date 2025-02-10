@@ -1,0 +1,202 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  background: #f0f0f0;
+  scroll-behavior: smooth;
+}
+
+/* Header Styling */
+header {
+  background: url('images/banner.jpg') no-repeat center center;
+  background-size: cover;
+  width: 100vw;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.header-overlay {
+  background: rgba(255, 255, 255, 0.65);
+  color: #6a1b9a;
+  padding: 40px 60px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.header-overlay h1 {
+  margin: 0;
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+.header-overlay p {
+  margin: 10px 0 0;
+  font-size: 1.5rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* General Section Styling */
+section {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-bottom: 30px;
+  min-height: 400px;
+}
+
+/* Random Fact Section Styling */
+#fact-section {
+  background: #f8f1e4;
+  border: 3px solid #6a1b9a;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+}
+
+/* Fact Card Styling */
+.fact-card {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  border: 2px dashed #6a1b9a;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Cinzel', serif;
+}
+
+/* Pop-In Animation for Random Fact */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pop-in {
+  animation: popIn 0.8s ease-out;
+}
+
+/* Quiz Section - Parchment / Scroll Look */
+#quiz-section {
+  background: url('images/parchment.jpg') no-repeat center center, #f8f1e4;
+  background-size: cover;
+  border: 3px double #6a1b9a;
+  border-radius: 15px;
+  padding: 30px;
+  font-family: 'Cinzel', serif;
+}
+
+.btn {
+  background: #6a1b9a;
+  color: #fff;
+  padding: 14px 28px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+}
+
+.btn:hover {
+  background: #4a148c;
+  transform: scale(1.05);
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #6a1b9a;
+  color: #fff;
+  width: 100%;
+}
+
+nav {
+  background: #6a1b9a;
+  text-align: center;
+  padding: 10px 0;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.quiz-question {
+  margin-bottom: 20px;
+}
+
+.quiz-question p {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.quiz-question label {
+  display: block;
+  margin: 5px 0;
+  font-size: 1.1rem;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+/* Tension Text Styling */
+.tension {
+  font-style: italic;
+  text-align: center;
+  font-size: 1.4rem;
+  color: #6a1b9a;
+}
+
+/* Result Reveal Styling */
+.result-reveal {
+  background: #fff3cd;
+  border: 3px solid #6a1b9a;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  color: #6a1b9a;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-out;
+}
