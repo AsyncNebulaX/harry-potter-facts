@@ -1,74 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Harry Potter Fact Hub & Quiz</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* Global Styles */
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
-      padding: 0 20px;
+      padding: 0;
+      background: #f5f5f5;
       color: #333;
     }
+    /* Header with Background Image */
     header {
+      background: url('https://via.placeholder.com/1500x500?text=Harry+Potter') no-repeat center center/cover;
+      color: #fff;
       text-align: center;
-      padding: 2rem 0;
-      background-color: #6a1b9a;
-      color: #fff;
+      padding: 4rem 1rem;
     }
-    h1 {
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1.2rem;
       margin: 0;
-      font-size: 2.5rem;
     }
-    section {
-      margin: 2rem 0;
-      padding: 1rem;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* Navigation Bar */
+    nav {
+      background: #6a1b9a;
+      padding: 0.5rem;
+      text-align: center;
     }
-    .btn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      margin: 1rem 0;
-      font-size: 1rem;
+    nav a {
       color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+      transition: text-decoration 0.3s;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    /* Section Styles */
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    /* Button Styles */
+    .btn {
       background-color: #6a1b9a;
+      color: #fff;
       border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
       border-radius: 4px;
       cursor: pointer;
+      transition: background 0.3s;
+      display: inline-block;
+      margin-top: 1rem;
     }
     .btn:hover {
       background-color: #4a148c;
     }
+    /* Random Fact Display */
+    #factDisplay {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    #factDisplay.visible {
+      opacity: 1;
+    }
+    /* Quiz Styles */
     .quiz-question {
       margin-bottom: 1.5rem;
     }
     .quiz-question p {
       font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-question label {
+      display: block;
+      margin: 0.3rem 0;
     }
     .result {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin-top: 1rem;
-      padding: 1rem;
       background: #e8eaf6;
+      padding: 1rem;
       border-radius: 4px;
+      text-align: center;
+      display: none;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #6a1b9a;
+      color: #fff;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
-
+  <!-- Header -->
   <header>
     <h1>Harry Potter Fact Hub & Quiz</h1>
-    <p>Discover random Harry Potter facts and find out which Hogwarts house fits you best!</p>
+    <p>Discover magical facts and find out your Hogwarts house!</p>
   </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#fact-section">Random Fact</a>
+    <a href="#quiz-section">Quiz</a>
+  </nav>
 
   <!-- Random Fact Section -->
   <section id="fact-section">
     <h2>Random Harry Potter Fact</h2>
-    <p id="factDisplay">Click the button to reveal a magical fact!</p>
+    <p id="factDisplay">Click the button below to reveal a magical fact!</p>
     <button class="btn" onclick="showRandomFact()">Show Random Fact</button>
   </section>
 
@@ -78,32 +138,37 @@
     <form id="quizForm">
       <!-- Question 1 -->
       <div class="quiz-question">
-        <p>1. What quality do you value most?</p>
-        <label><input type="radio" name="q1" value="Gryffindor"> Bravery</label><br>
-        <label><input type="radio" name="q1" value="Ravenclaw"> Intelligence</label><br>
-        <label><input type="radio" name="q1" value="Hufflepuff"> Loyalty</label><br>
+        <p>1. What quality do you value the most?</p>
+        <label><input type="radio" name="q1" value="Gryffindor"> Bravery</label>
+        <label><input type="radio" name="q1" value="Ravenclaw"> Intelligence</label>
+        <label><input type="radio" name="q1" value="Hufflepuff"> Loyalty</label>
         <label><input type="radio" name="q1" value="Slytherin"> Ambition</label>
       </div>
       <!-- Question 2 -->
       <div class="quiz-question">
-        <p>2. Which animal do you identify with most?</p>
-        <label><input type="radio" name="q2" value="Gryffindor"> Lion</label><br>
-        <label><input type="radio" name="q2" value="Ravenclaw"> Eagle</label><br>
-        <label><input type="radio" name="q2" value="Hufflepuff"> Badger</label><br>
+        <p>2. Which animal do you feel represents you?</p>
+        <label><input type="radio" name="q2" value="Gryffindor"> Lion</label>
+        <label><input type="radio" name="q2" value="Ravenclaw"> Eagle</label>
+        <label><input type="radio" name="q2" value="Hufflepuff"> Badger</label>
         <label><input type="radio" name="q2" value="Slytherin"> Snake</label>
       </div>
       <!-- Question 3 -->
       <div class="quiz-question">
-        <p>3. Which subject would you enjoy the most?</p>
-        <label><input type="radio" name="q3" value="Gryffindor"> Defense Against the Dark Arts</label><br>
-        <label><input type="radio" name="q3" value="Ravenclaw"> Charms</label><br>
-        <label><input type="radio" name="q3" value="Hufflepuff"> Herbology</label><br>
+        <p>3. Which subject would you be most excited to learn?</p>
+        <label><input type="radio" name="q3" value="Gryffindor"> Defense Against the Dark Arts</label>
+        <label><input type="radio" name="q3" value="Ravenclaw"> Charms</label>
+        <label><input type="radio" name="q3" value="Hufflepuff"> Herbology</label>
         <label><input type="radio" name="q3" value="Slytherin"> Potions</label>
       </div>
       <button type="button" class="btn" onclick="submitQuiz()">Submit Quiz</button>
     </form>
-    <div id="quizResult" class="result" style="display:none;"></div>
+    <div id="quizResult" class="result"></div>
   </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Harry Potter Fact Hub & Quiz. All rights reserved.
+  </footer>
 
   <script>
     // Array of sample Harry Potter facts
@@ -115,50 +180,54 @@
       "The Marauder's Map shows every person's location within Hogwarts."
     ];
 
-    // Function to display a random fact
+    // Function to display a random fact with a fade-in effect
     function showRandomFact() {
       const randomIndex = Math.floor(Math.random() * facts.length);
-      document.getElementById('factDisplay').textContent = facts[randomIndex];
+      const factDisplay = document.getElementById('factDisplay');
+      factDisplay.classList.remove('visible'); // Reset opacity to start fade-in
+      setTimeout(() => {
+        factDisplay.textContent = facts[randomIndex];
+        factDisplay.classList.add('visible');
+      }, 100);
     }
 
-    // Function to process the quiz results
+    // Function to process quiz results
     function submitQuiz() {
-      const quizForm = document.getElementById('quizForm');
-      const formData = new FormData(quizForm);
-      const answers = {
+      const form = document.getElementById('quizForm');
+      const formData = new FormData(form);
+      const scores = {
         Gryffindor: 0,
         Ravenclaw: 0,
         Hufflepuff: 0,
         Slytherin: 0
       };
 
-      // Tally up the answers
+      // Count the score for each selected answer
       ['q1', 'q2', 'q3'].forEach(q => {
         const answer = formData.get(q);
-        if (answer && answers.hasOwnProperty(answer)) {
-          answers[answer]++;
+        if (answer && scores.hasOwnProperty(answer)) {
+          scores[answer]++;
         }
       });
 
       // Determine the house with the highest score
       let selectedHouse = null;
       let maxScore = 0;
-      for (const house in answers) {
-        if (answers[house] > maxScore) {
-          maxScore = answers[house];
+      for (const house in scores) {
+        if (scores[house] > maxScore) {
+          maxScore = scores[house];
           selectedHouse = house;
         }
       }
 
-      // Display the result
-      const resultDiv = document.getElementById('quizResult');
+      // Display the quiz result
+      const quizResult = document.getElementById('quizResult');
       if (selectedHouse) {
-        resultDiv.textContent = `You belong to ${selectedHouse}!`;
-        resultDiv.style.display = 'block';
+        quizResult.textContent = `You belong to ${selectedHouse}!`;
       } else {
-        resultDiv.textContent = 'Please answer all the questions.';
-        resultDiv.style.display = 'block';
+        quizResult.textContent = 'Please answer all the questions before submitting.';
       }
+      quizResult.style.display = 'block';
     }
   </script>
 </body>
