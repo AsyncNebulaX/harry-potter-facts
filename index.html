@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harry Potter Fact Hub & Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0 20px;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 0;
+      background-color: #6a1b9a;
+      color: #fff;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    section {
+      margin: 2rem 0;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      margin: 1rem 0;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #6a1b9a;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #4a148c;
+    }
+    .quiz-question {
+      margin-bottom: 1.5rem;
+    }
+    .quiz-question p {
+      font-weight: bold;
+    }
+    .result {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #e8eaf6;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Harry Potter Fact Hub & Quiz</h1>
+    <p>Discover random Harry Potter facts and find out which Hogwarts house fits you best!</p>
+  </header>
+
+  <!-- Random Fact Section -->
+  <section id="fact-section">
+    <h2>Random Harry Potter Fact</h2>
+    <p id="factDisplay">Click the button to reveal a magical fact!</p>
+    <button class="btn" onclick="showRandomFact()">Show Random Fact</button>
+  </section>
+
+  <!-- Quiz Section -->
+  <section id="quiz-section">
+    <h2>Which Hogwarts House Are You?</h2>
+    <form id="quizForm">
+      <!-- Question 1 -->
+      <div class="quiz-question">
+        <p>1. What quality do you value most?</p>
+        <label><input type="radio" name="q1" value="Gryffindor"> Bravery</label><br>
+        <label><input type="radio" name="q1" value="Ravenclaw"> Intelligence</label><br>
+        <label><input type="radio" name="q1" value="Hufflepuff"> Loyalty</label><br>
+        <label><input type="radio" name="q1" value="Slytherin"> Ambition</label>
+      </div>
+      <!-- Question 2 -->
+      <div class="quiz-question">
+        <p>2. Which animal do you identify with most?</p>
+        <label><input type="radio" name="q2" value="Gryffindor"> Lion</label><br>
+        <label><input type="radio" name="q2" value="Ravenclaw"> Eagle</label><br>
+        <label><input type="radio" name="q2" value="Hufflepuff"> Badger</label><br>
+        <label><input type="radio" name="q2" value="Slytherin"> Snake</label>
+      </div>
+      <!-- Question 3 -->
+      <div class="quiz-question">
+        <p>3. Which subject would you enjoy the most?</p>
+        <label><input type="radio" name="q3" value="Gryffindor"> Defense Against the Dark Arts</label><br>
+        <label><input type="radio" name="q3" value="Ravenclaw"> Charms</label><br>
+        <label><input type="radio" name="q3" value="Hufflepuff"> Herbology</label><br>
+        <label><input type="radio" name="q3" value="Slytherin"> Potions</label>
+      </div>
+      <button type="button" class="btn" onclick="submitQuiz()">Submit Quiz</button>
+    </form>
+    <div id="quizResult" class="result" style="display:none;"></div>
+  </section>
+
+  <script>
+    // Array of sample Harry Potter facts
+    const facts = [
+      "J.K. Rowling wrote much of the first Harry Potter book in Edinburgh cafés.",
+      "The character of Harry Potter was almost named 'Harry Batt'.",
+      "Hogwarts has four houses: Gryffindor, Ravenclaw, Hufflepuff, and Slytherin.",
+      "The Hogwarts Express departs from Platform 9¾ at King's Cross Station.",
+      "The Marauder's Map shows every person's location within Hogwarts."
+    ];
+
+    // Function to display a random fact
+    function showRandomFact() {
+      const randomIndex = Math.floor(Math.random() * facts.length);
+      document.getElementById('factDisplay').textContent = facts[randomIndex];
+    }
+
+    // Function to process the quiz results
+    function submitQuiz() {
+      const quizForm = document.getElementById('quizForm');
+      const formData = new FormData(quizForm);
+      const answers = {
+        Gryffindor: 0,
+        Ravenclaw: 0,
+        Hufflepuff: 0,
+        Slytherin: 0
+      };
+
+      // Tally up the answers
+      ['q1', 'q2', 'q3'].forEach(q => {
+        const answer = formData.get(q);
+        if (answer && answers.hasOwnProperty(answer)) {
+          answers[answer]++;
+        }
+      });
+
+      // Determine the house with the highest score
+      let selectedHouse = null;
+      let maxScore = 0;
+      for (const house in answers) {
+        if (answers[house] > maxScore) {
+          maxScore = answers[house];
+          selectedHouse = house;
+        }
+      }
+
+      // Display the result
+      const resultDiv = document.getElementById('quizResult');
+      if (selectedHouse) {
+        resultDiv.textContent = `You belong to ${selectedHouse}!`;
+        resultDiv.style.display = 'block';
+      } else {
+        resultDiv.textContent = 'Please answer all the questions.';
+        resultDiv.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
