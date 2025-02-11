@@ -3,10 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Harry Potter Fact Hub & Quiz</title>
-  <!-- Added Cinzel for a more medieval look along with Roboto -->
+  
+  <!-- Page Title -->
+  <title>Harry Potter Fact Hub & Quiz – Discover Magical Facts & Your Hogwarts House</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Discover magical Harry Potter facts, take an interactive quiz to find your Hogwarts house, and immerse yourself in the wizarding world.">
+  <meta name="keywords" content="Harry Potter, Hogwarts, Facts, Quiz, Wizarding, Magic, Interactive">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://asyncnebulax.github.io/">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Harry Potter Fact Hub & Quiz">
+  <meta property="og:description" content="Discover magical Harry Potter facts and take an interactive quiz to determine your Hogwarts house.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://asyncnebulax.github.io/">
+  <meta property="og:image" content="https://asyncnebulax.github.io/images/banner.jpg">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Harry Potter Fact Hub & Quiz">
+  <meta name="twitter:description" content="Discover magical Harry Potter facts and find out your Hogwarts house with our interactive quiz.">
+  <meta name="twitter:image" content="https://asyncnebulax.github.io/images/banner.jpg">
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Harry Potter Fact Hub & Quiz",
+    "url": "https://asyncnebulax.github.io/",
+    "description": "Discover magical Harry Potter facts, take an interactive quiz to find your Hogwarts house, and immerse yourself in the wizarding world."
+  }
+  </script>
+  
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css">
+  
   <!-- Canvas-confetti library for the confetti effect -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
@@ -180,9 +216,9 @@
       const randomIndex = Math.floor(Math.random() * facts.length);
       const factElement = document.getElementById('factDisplay');
       factElement.textContent = facts[randomIndex];
-      // Trigger pop-in animation by removing and re-adding the class
+      // Trigger pop-in animation by restarting the animation class
       factElement.classList.remove('pop-in');
-      void factElement.offsetWidth; // Trigger reflow to restart animation
+      void factElement.offsetWidth; // Trigger reflow to restart the animation
       factElement.classList.add('pop-in');
     }
 
